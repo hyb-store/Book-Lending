@@ -1,4 +1,6 @@
-
+> [推荐算法-协同过滤算法](https://github.com/hyb-store/mahout)
+>
+> [OCR文字识别](https://github.com/hyb-store/ocr)
 
 
 
