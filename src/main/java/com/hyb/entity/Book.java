@@ -9,13 +9,15 @@ public class Book {
     private String author;
     private String press;
     private Date pubTime;
-    private Type type;
+    private Integer tid;
     private String bookImg;
     private String description;
-    private User user;
+    private Integer uid;
     private Integer status;
     private Integer count;
 
+    private Type type;
+    private User user;
     private List<Comment> comments;//评论
 
     public Book() {
@@ -47,30 +49,20 @@ public class Book {
         this.count = count;
     }
 
-    public Book(Integer bid, String bookName, String author, String press, Date pubTime, Type type, String bookImg, String description, User user, Integer status, Integer count, List<Comment> comments) {
+    public Book(Integer bid, String bookName, String author, String press, Date pubTime, Integer tid, String bookImg, String description, Integer uid, Integer status, Integer count, Type type, User user, List<Comment> comments) {
         this.bid = bid;
         this.bookName = bookName;
         this.author = author;
         this.press = press;
         this.pubTime = pubTime;
-        this.type = type;
+        this.tid = tid;
         this.bookImg = bookImg;
         this.description = description;
-        this.user = user;
+        this.uid = uid;
         this.status = status;
         this.count = count;
-        this.comments = comments;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
+        this.type = type;
+        this.user = user;
         this.comments = comments;
     }
 
@@ -114,12 +106,12 @@ public class Book {
         this.pubTime = pubTime;
     }
 
-    public Type getType() {
-        return type;
+    public Integer getTid() {
+        return tid;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setTid(Integer tid) {
+        this.tid = tid;
     }
 
     public String getBookImg() {
@@ -138,6 +130,30 @@ public class Book {
         this.description = description;
     }
 
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     public User getUser() {
         return user;
     }
@@ -146,11 +162,11 @@ public class Book {
         this.user = user;
     }
 
-    public int getStatus() {
-        return status;
+    public List<Comment> getComments() {
+        return comments;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

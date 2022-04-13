@@ -5,36 +5,43 @@ import java.util.Date;
 public class History {
 
     private Integer hid;
-    private Book book;
-    private User user;
+    private Integer bid;
+    private Integer uid;
     private Date startTime;
     private Date endTime;
     private Date realTime;
     private Integer punctuality;//是否准时：0准时 1不准时
 
+    private Book book;
+    private User user;
+
     public History() {
     }
 
-    public History(Integer hid, Book book, User user, Date startTime, Date endTime, Date realTime, Integer punctuality) {
+    public History(Integer hid, Integer bid, Integer uid, Date startTime, Date endTime, Date realTime, Integer punctuality, Book book, User user) {
         this.hid = hid;
-        this.book = book;
-        this.user = user;
+        this.bid = bid;
+        this.uid = uid;
         this.startTime = startTime;
         this.endTime = endTime;
         this.realTime = realTime;
         this.punctuality = punctuality;
+        this.book = book;
+        this.user = user;
     }
 
     @Override
     public String toString() {
         return "History{" +
                 "hid=" + hid +
-                ", book=" + book +
-                ", user=" + user +
+                ", bid=" + bid +
+                ", uid=" + uid +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", realTime=" + realTime +
                 ", punctuality=" + punctuality +
+                ", book=" + book +
+                ", user=" + user +
                 '}';
     }
 
@@ -46,20 +53,20 @@ public class History {
         this.hid = hid;
     }
 
-    public Book getBook() {
-        return book;
+    public Integer getBid() {
+        return bid;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBid(Integer bid) {
+        this.bid = bid;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public Date getStartTime() {
@@ -92,5 +99,21 @@ public class History {
 
     public void setPunctuality(Integer punctuality) {
         this.punctuality = punctuality;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
