@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyb.mapper.HistoryMapper">
+
+    <resultMap id="historyMap" type="com.hyb.entity.History">
+        <id property="hid" column="hid"></id>
+        <result property="lUid" column="lUid"></result>
+        <result property="bid" column="bid"></result>
+        <result property="bUid" column="bUid"></result>
+        <result property="startTime" column="start_time"></result>
+        <result property="endTime" column="end_time"></result>
+        <result property="realTime" column="real_time"></result>
+        <result property="punctuality" column="punctuality"></result>
+        <association property="bUser" column="buid" javaType="com.hyb.entity.User"><!-- 借谁的书-->
+            <id property="uid" column="uid"></id>
+            <result property="openId" column="open_id"></result>
+            <result property="username" column="username"></result>
+            <result property="gender" column="gender"></result>
+            <result property="address" column="address"></result>
+            <result property="phoneNum" column="phone_num"></result>
+            <result property="email" column="email"></result>
+            <result property="scores" column="scores"></result>
+            <result property="registerTime" column="register_time"></result>
+            <result property="role" column="role"></result>
+        </association>
+        <association property="lUser" column="luid" javaType="com.hyb.entity.User"><!-- 借谁的书-->
+            <id property="uid" column="uid"></id>
+            <result property="openId" column="open_id"></result>
+            <result property="username" column="username"></result>
+            <result property="gender" column="gender"></result>
+            <result property="address" column="address"></result>
+            <result property="phoneNum" column="phone_num"></result>
+            <result property="email" column="email"></result>
+            <result property="scores" column="scores"></result>
+            <result property="registerTime" column="register_time"></result>
+            <result property="role" column="role"></result>
+        </association>
+        <association property="book" column="bid" javaType="com.hyb.entity.Book">
+            <id property="bid" column="bid"></id>
+            <result property="bookName" column="book_name"></result>
+            <result property="author" column="author"></result>
+            <result property="press" column="press"></result>
+            <result property="pubTime" column="pub_time"></result>
+            <result property="tid" column="tid"></result>
+            <result property="bookImg" column="book_img"></result>
+            <result property="description" column="description"></result>
+            <result property="uid" column="uid"></result>
+            <result property="status" column="status"></result>
+            <result property="count" column="count"></result>
+            <association property="type" column="tid" javaType="com.hyb.entity.Type">
+                <id property="tid" column="tid"></id>
+                <result property="typeName" column="type_name"></result>
+            </association>
+        </association>
+    </resultMap>
+
+<!--    <select id="selectMyLendRecord" parameterType="Integer" resultMap="historyMap">
+        select * from history h, `user` u, book b where h.luid = #{uid} and h.luid = u.uid and h.bid = b.bid
+    </select>-->
+
+    <select id="selectMyLendRecord" parameterType="Integer" resultMap="historyMap">
+        select * from history h left join `user` u on h.buid = u.uid left join book b on h.bid = b.bid left join `type` t on b.tid = t.tid where h.luid = #{uid}
+    </select>
+
+    <select id="selectMyBorrowRecord" parameterType="Integer" resultMap="historyMap">
+        select * from history h left join `user` u on h.luid = u.uid left join book b on h.bid = b.bid left join `type` t on b.tid = t.tid where h.buid = #{uid}
+    </select>
+
+
+
+</mapper>

@@ -5,43 +5,51 @@ import java.util.Date;
 public class History {
 
     private Integer hid;
+    private Integer lUid;
     private Integer bid;
-    private Integer uid;
+    private Integer bUid;
     private Date startTime;
     private Date endTime;
     private Date realTime;
     private Integer punctuality;//是否准时：0准时 1不准时
 
+    private User lUser;
     private Book book;
-    private User user;
+    private User bUser;
 
     public History() {
     }
 
-    public History(Integer hid, Integer bid, Integer uid, Date startTime, Date endTime, Date realTime, Integer punctuality, Book book, User user) {
+    public History(Integer hid, Integer lUid, Integer bid, Integer bUid,
+                   Date startTime, Date endTime, Date realTime, Integer punctuality,
+                   User lUser, Book book, User bUser) {
         this.hid = hid;
+        this.lUid = lUid;
         this.bid = bid;
-        this.uid = uid;
+        this.bUid = bUid;
         this.startTime = startTime;
         this.endTime = endTime;
         this.realTime = realTime;
         this.punctuality = punctuality;
+        this.lUser = lUser;
         this.book = book;
-        this.user = user;
+        this.bUser = bUser;
     }
 
     @Override
     public String toString() {
         return "History{" +
                 "hid=" + hid +
+                ", lUid=" + lUid +
                 ", bid=" + bid +
-                ", uid=" + uid +
+                ", bUid=" + bUid +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", realTime=" + realTime +
                 ", punctuality=" + punctuality +
+                ", lUser=" + lUser +
                 ", book=" + book +
-                ", user=" + user +
+                ", bUser=" + bUser +
                 '}';
     }
 
@@ -53,6 +61,14 @@ public class History {
         this.hid = hid;
     }
 
+    public Integer getlUid() {
+        return lUid;
+    }
+
+    public void setlUid(Integer lUid) {
+        this.lUid = lUid;
+    }
+
     public Integer getBid() {
         return bid;
     }
@@ -61,12 +77,12 @@ public class History {
         this.bid = bid;
     }
 
-    public Integer getUid() {
-        return uid;
+    public Integer getbUid() {
+        return bUid;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setbUid(Integer bUid) {
+        this.bUid = bUid;
     }
 
     public Date getStartTime() {
@@ -101,6 +117,14 @@ public class History {
         this.punctuality = punctuality;
     }
 
+    public User getlUser() {
+        return lUser;
+    }
+
+    public void setlUser(User lUser) {
+        this.lUser = lUser;
+    }
+
     public Book getBook() {
         return book;
     }
@@ -109,11 +133,11 @@ public class History {
         this.book = book;
     }
 
-    public User getUser() {
-        return user;
+    public User getbUser() {
+        return bUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setbUser(User bUser) {
+        this.bUser = bUser;
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyb.mapper.BorrowMapper">
+
+    <resultMap id="Borrow" type="com.hyb.entity.Book">
+        <id property="bid" column="bid"></id>
+        <result property="bookName" column="book_name"></result>
+        <result property="author" column="author"></result>
+        <result property="press" column="press"></result>
+        <result property="pubTime" column="pub_time"></result>
+        <result property="tid" column="tid"></result>
+        <result property="bookImg" column="book_img"></result>
+        <result property="description" column="description"></result>
+        <result property="uid" column="uid"></result>
+        <result property="uid" column="status"></result>
+        <result property="count" column="count"></result>
+    </resultMap>
+
+    <insert id="insertNewBook" parameterType="com.hyb.entity.Book">
+          insert into book (book_name, author, press, pub_time, tid, book_img, description, uid, status, `count`)
+        values (#{bookName}, #{author}, #{press}, #{pubTime}, #{tid}, #{bookImg}, #{description}, #{uid}, #{uid}), #{count})
+    </insert>
+
+
+
+</mapper>

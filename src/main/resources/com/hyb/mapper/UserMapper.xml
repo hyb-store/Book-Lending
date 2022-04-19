@@ -15,12 +15,26 @@
         <result property="email" column="email"></result>
         <result property="scores" column="scores"></result>
         <result property="registerTime" column="register_time"></result>
-        <result property="role" column="admin"></result>
+        <result property="role" column="role"></result>
     </resultMap>
-<!--
-    <select id="selectOne" parameterType="String" resultMap="userMap">
-        select * from user where username = #{username};
-    </select>-->
+
+    <select id="selectUserByOpenId" parameterType="String" resultMap="userMap">
+        select * from user where open_id = #{openId}
+    </select>
+
+    <insert id="insertUser" parameterType="com.hyb.entity.User">
+        insert into user (open_id, username, gender, address, phone_num, email, scores, register_time, role)
+        values (#{openId}, #{username}, #{gender}, #{address}, #{phoneNum}, #{email}, #{scores}, #{register_time}, #{role})
+    </insert>
+
+    <update id="updateUser" parameterType="com.hyb.entity.User">
+        update user set username = #{username}, gender = #{gender}, address = #{address}, phone_num = #{phoneNum}, email = #{email}, scores = #{scores}, role = #{role}
+        where open_id = #{openId}
+    </update>
+
+    <select id="idByOpenId" parameterType="String" resultType="Integer">
+        select uid from user where open_id = #{openId}
+    </select>
 
 
 </mapper>

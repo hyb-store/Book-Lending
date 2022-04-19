@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Book {
+
+    private final String URL = "http://127.0.0.1:8080/image/";
+
+
     private Integer bid;
     private String bookName;
     private String author;
@@ -26,17 +30,20 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "bid=" + bid +
+                "URL='" + URL + '\'' +
+                ", bid=" + bid +
                 ", bookName='" + bookName + '\'' +
                 ", author='" + author + '\'' +
                 ", press='" + press + '\'' +
                 ", pubTime=" + pubTime +
-                ", type=" + type +
+                ", tid=" + tid +
                 ", bookImg='" + bookImg + '\'' +
                 ", description='" + description + '\'' +
-                ", user=" + user +
+                ", uid=" + uid +
                 ", status=" + status +
                 ", count=" + count +
+                ", type=" + type +
+                ", user=" + user +
                 ", comments=" + comments +
                 '}';
     }
@@ -119,7 +126,7 @@ public class Book {
     }
 
     public void setBookImg(String bookImg) {
-        this.bookImg = bookImg;
+        this.bookImg = URL + bookImg;
     }
 
     public String getDescription() {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyb.mapper.BookMapper">
+
+    <resultMap id="bookMap" type="com.hyb.entity.Book">
+        <id property="bid" column="bid"></id>
+        <result property="bookName" column="book_name"></result>
+        <result property="author" column="author"></result>
+        <result property="press" column="press"></result>
+        <result property="pubTime" column="pub_time"></result>
+        <result property="tid" column="tid"></result>
+        <result property="bookImg" column="book_img"></result>
+        <result property="description" column="description"></result>
+        <result property="uid" column="uid"></result>
+        <result property="status" column="status"></result>
+        <result property="count" column="count"></result>
+        <association property="type" column="tid" javaType="com.hyb.entity.Type">
+            <id property="tid" column="tid"></id>
+            <result property="typeName" column="type_name"></result>
+        </association>
+        <association property="user" column="uid" javaType="com.hyb.entity.User">
+            <id property="uid" column="uid"></id>
+            <result property="openId" column="open_id"></result>
+            <result property="username" column="username"></result>
+            <result property="gender" column="gender"></result>
+            <result property="address" column="address"></result>
+            <result property="phoneNum" column="phone_num"></result>
+            <result property="email" column="email"></result>
+            <result property="scores" column="scores"></result>
+            <result property="registerTime" column="register_time"></result>
+            <result property="role" column="role"></result>
+        </association>
+    </resultMap>
+
+    <select id="selectMyBooks" parameterType="Integer" resultMap="bookMap">
+        select * from book b, `user` u, `type` t where b.uid = #{uid} and u.uid = #{uid} and t.tid = b.tid
+    </select>
+
+
+
+</mapper>
