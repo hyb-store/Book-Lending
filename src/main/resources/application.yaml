@@ -14,6 +14,12 @@ spring:
   mvc:
     #表示所有的访问都经过静态资源路径
     static-path-pattern: /**
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 50MB
 
 mybatis:
   type-aliases-package: com.hyb.entity
@@ -35,5 +41,5 @@ logging:
     com.hyb.mapper: debug
 
 file:
-  save-path: E:\IdeaProjects\book_lending\src\main\resources\static\image
+  save-path: E:/IdeaProjects/book_lending/src/main/resources/static/image/
 

@@ -36,5 +36,9 @@
         select uid from user where open_id = #{openId}
     </select>
 
+    <select id="selectUserById" parameterType="Integer" resultMap="userMap">
+        select * from user where uid = #{uid}
+    </select>
+
 
 </mapper>

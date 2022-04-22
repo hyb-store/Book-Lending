@@ -21,4 +21,5 @@ public interface UserService {
     public List<History> getMyLendRecord(Integer uid);
 
     public List<History> getMyBorrowRecord(Integer uid);
+
 }

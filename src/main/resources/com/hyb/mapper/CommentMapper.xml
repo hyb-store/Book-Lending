@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hyb.mapper.CommentMapper">
+    <resultMap id="commentMap" type="com.hyb.entity.Comment">
+        <id property="cid" column="cid"></id>
+        <result property="bid" column="bid"></result>
+        <result property="uid" column="uid"></result>
+        <result property="commentTime" column="comment_time"></result>
+        <result property="content" column="content"></result>
+    </resultMap>
+
+    <select id="selectByBid" parameterType="Integer" resultMap="commentMap">
+        select * from comment where bid = #{bid}
+    </select>
+
+</mapper>

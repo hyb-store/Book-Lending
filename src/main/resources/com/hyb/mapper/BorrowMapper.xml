@@ -5,7 +5,7 @@
 
 <mapper namespace="com.hyb.mapper.BorrowMapper">
 
-    <resultMap id="Borrow" type="com.hyb.entity.Book">
+    <resultMap id="borrowMap" type="com.hyb.entity.Book">
         <id property="bid" column="bid"></id>
         <result property="bookName" column="book_name"></result>
         <result property="author" column="author"></result>

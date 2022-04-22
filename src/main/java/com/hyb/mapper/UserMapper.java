@@ -15,4 +15,6 @@ public interface UserMapper {
     void updateUser(User user);
 
     int idByOpenId(String openId);//根据openid找uid
+
+    User selectUserById(Integer uid);//根据id找user
 }

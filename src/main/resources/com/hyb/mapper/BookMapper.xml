@@ -39,6 +39,22 @@
         select * from book b, `user` u, `type` t where b.uid = #{uid} and u.uid = #{uid} and t.tid = b.tid
     </select>
 
+    <select id="selectBookByTid" parameterType="Integer" resultMap="bookMap">
+        select * from book b, `user` u, `type` t where b.tid = #{tid} and u.uid = b.uid and t.tid = #{tid}
+    </select>
+
+    <select id="search" parameterType="String" resultMap="bookMap">
+        select * from book b where b.book_name like concat('%', #{data}, '%') or b.press like concat('%', #{data}, '%') or b.description like concat('%', #{data}, '%')
+    </select>
+
+    <select id="selectBookByBid" parameterType="Integer" resultMap="bookMap">
+        select * from book where bid = #{bid}
+    </select>
+
+    <select id="selectCount" resultType="Integer">
+        select count(bid) from book
+    </select>
+
 
 
 </mapper>
