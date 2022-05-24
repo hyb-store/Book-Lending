@@ -24,11 +24,11 @@
 
     <insert id="insertUser" parameterType="com.hyb.entity.User">
         insert into user (open_id, username, gender, address, phone_num, email, scores, register_time, role)
-        values (#{openId}, #{username}, #{gender}, #{address}, #{phoneNum}, #{email}, #{scores}, #{register_time}, #{role})
+        values (#{openId}, #{username}, #{gender}, #{address}, #{phoneNum}, #{email}, #{scores}, #{registerTime}, #{role})
     </insert>
 
     <update id="updateUser" parameterType="com.hyb.entity.User">
-        update user set username = #{username}, gender = #{gender}, address = #{address}, phone_num = #{phoneNum}, email = #{email}, scores = #{scores}, role = #{role}
+        update user set username = #{username}, gender = #{gender}, address = #{address}, phone_num = #{phoneNum}, email = #{email}, role = #{role}
         where open_id = #{openId}
     </update>
 
@@ -39,6 +39,14 @@
     <select id="selectUserById" parameterType="Integer" resultMap="userMap">
         select * from user where uid = #{uid}
     </select>
+
+    <select id="selectScoresByUid" parameterType="Integer" resultType="Integer">
+        select scores from `user` where uid = #{uid}
+    </select>
+
+    <update id="updateScoresByUid">
+         update user set scores = scores + #{scores} where uid = #{uid}
+    </update>
 
 
 </mapper>

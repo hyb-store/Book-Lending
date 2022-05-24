@@ -33,6 +33,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void insertUser(User user) {
         user.setScores(0);
+        user.setGender(2);//保密
+        user.setRole(2);//保密
         user.setRegisterTime(new Date());
         userMapper.insertUser(user);
     }
@@ -60,6 +62,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<History> getMyBorrowRecord(Integer uid) {
         return historyService.selectMyBorrowRecord(uid);
+    }
+
+    @Override
+    public int selectScoresByUid(Integer uid) {
+        return userMapper.selectScoresByUid(uid);
+    }
+
+    @Override
+    public void updateScoresByUid(Integer uid, Integer scores) {
+        userMapper.updateScoresByUid(uid, scores);
     }
 
 }

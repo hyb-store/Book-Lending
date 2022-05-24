@@ -4,14 +4,12 @@ import com.hyb.entity.Book;
 import com.hyb.entity.Comment;
 import com.hyb.entity.Type;
 import com.hyb.entity.User;
-import com.hyb.mapper.BookMapper;
-import com.hyb.mapper.CommentMapper;
-import com.hyb.mapper.TypeMapper;
-import com.hyb.mapper.UserMapper;
+import com.hyb.mapper.*;
 import com.hyb.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +23,9 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private HistoryMapper historyMapper;
 
     @Autowired
     private TypeMapper typeMapper;
@@ -51,6 +52,35 @@ public class BookServiceImpl implements BookService {
         book.setComments(comments);
 
         return book;
+    }
+
+    @Override
+    public void insertComment(Comment comment) {
+        comment.setCommentTime(new Date());
+        commentMapper.insertComment(comment);
+    }
+
+    @Override
+    public Book selectBookByBid(Integer bid) {
+        return bookMapper.selectBookByBid(bid);
+    }
+
+    @Override
+    public void updateBook(Book book) {
+        bookMapper.updateBook(book);
+    }
+
+    @Override
+    public void deleteBook(Integer bid) {
+        //删除book表中的数据
+        bookMapper.deleteBookByBid(bid);
+        //删除记录
+        historyMapper.deleteHistoryByBid(bid);
+    }
+
+    @Override
+    public void deleteComment(Integer cid) {
+        commentMapper.deleteComment(cid);
     }
 
 }

@@ -15,7 +15,13 @@ public interface IndexService {
      *
      * @return
      */
-    List<Book> getTop5();
+    List<Book> getTop3();
 
-    List<Book> getRecommend(Long userId, int howMany);
+    List<Book> getRecommend(Long uid, int howMany);
+
+    List<Book> getRandomRecommend(int howMany);
+
+    List<Book> getDRRecommend(Long uid, String data, int howMany);
+
+
 }

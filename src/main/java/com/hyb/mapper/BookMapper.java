@@ -27,10 +27,43 @@ public interface BookMapper {
     List<Book> search(String data);
 
     //根据bid查询书的所有信息
-    Book selectBookByBid(Integer uid);
+    Book selectBookByBid(Integer bid);
 
     /**
      * 共多少本书
      */
     int selectCount();
+
+    /**
+     * 获取借书最多的3本书
+     */
+    List<Book> getTop3();
+
+    /**
+     * 更新status
+     */
+    void updateStatusByBid(Integer bid, Integer status);
+
+    /**
+     * Count++
+     */
+    void increaseCount(Integer bid);
+
+    /**
+     * 根据bid找tid
+     * @return
+     */
+    int selectTidByBid(Integer bid);
+
+    /**
+     * 修改信息
+     * @param book
+     */
+    void updateBook(Book book);
+
+    /**
+     * 根据bid删除书
+     * @param bid
+     */
+    void deleteBookByBid(Integer bid);
 }

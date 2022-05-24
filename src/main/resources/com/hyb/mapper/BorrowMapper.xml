@@ -19,11 +19,8 @@
         <result property="count" column="count"></result>
     </resultMap>
 
-    <insert id="insertNewBook" parameterType="com.hyb.entity.Book">
-          insert into book (book_name, author, press, pub_time, tid, book_img, description, uid, status, `count`)
-        values (#{bookName}, #{author}, #{press}, #{pubTime}, #{tid}, #{bookImg}, #{description}, #{uid}, #{uid}), #{count})
+    <insert id="insertNewBook">
+          insert into book (book_name, author, press, pub_time, tid, book_img, description, uid, status, count)
+        values (#{book.bookName}, #{book.author}, #{book.press}, #{book.pubTime}, #{book.tid}, #{img}, #{book.description}, #{book.uid}, #{book.status}, #{book.count})
     </insert>
-
-
-
 </mapper>

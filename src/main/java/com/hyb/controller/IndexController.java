@@ -7,8 +7,10 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -29,21 +31,36 @@ public class IndexController {
         return responseData;
     }
 
-    @GetMapping("/getTop5")
-    public ResponseData getTop5() {
-        ResponseData responseData = null;
-
-        responseData = new ResponseData(1, "成功", null);
+    @GetMapping("/getTop3")
+    public ResponseData getTop3() {
+        ResponseData responseData;
+        List<Book> top3 = indexService.getTop3();
+        responseData = new ResponseData(1, "成功", top3);
         return responseData;
     }
 
     @GetMapping("/recommend") //获取主页推荐
-    public ResponseData getRecommend(Long uid) {
+    public ResponseData getRecommend(@RequestParam(name = "uid", required = false)Long uid,
+                                    @RequestParam(name = "data", required = false)String data) {
         ResponseData responseData = null;
-
-        List<Book> recommend = indexService.getRecommend(uid, 6);
-
-        responseData = new ResponseData(1, "成功", recommend);
+        List<Book> recommend;
+        if (uid == null && data != null) {//只有data,直接返回
+            return new ResponseData(0, "参数为空", null);
+        } else if (uid == null && data == null) {//都为空，随机推荐
+            //随机推荐
+            recommend = indexService.getRandomRecommend(6);
+            responseData = new ResponseData(1, "成功", recommend);
+        } else if (uid != null && data == null) {//只有uid，协同过滤
+            //根据用户uid，进行recommend
+            recommend = indexService.getRecommend(uid, 6);
+            Collections.shuffle(recommend);
+            responseData = new ResponseData(1, "成功", recommend);
+        } else if (uid != null && data != null) {
+            //根据用户选择和recommend推荐
+            recommend = indexService.getDRRecommend(uid, data, 6);
+            Collections.shuffle(recommend);
+            responseData = new ResponseData(1, "成功", recommend);
+        }
         return responseData;
     }
 }

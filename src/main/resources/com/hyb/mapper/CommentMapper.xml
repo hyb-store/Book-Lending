@@ -12,8 +12,20 @@
         <result property="content" column="content"></result>
     </resultMap>
 
+    <!--查询该书下所有评论-->
     <select id="selectByBid" parameterType="Integer" resultMap="commentMap">
         select * from comment where bid = #{bid}
     </select>
+
+    <!--插入新评论-->
+    <insert id="insertComment" parameterType="com.hyb.entity.Comment">
+        insert into comment (bid, uid, comment_time, content)
+        values (#{bid}, #{uid}, #{commentTime}, #{content})
+    </insert>
+
+    <!--删除评论-->
+    <delete id="deleteComment" parameterType="Integer">
+        DELETE FROM comment where cid = #{cid}
+    </delete>
 
 </mapper>

@@ -6,6 +6,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Configuration
 @EnableScheduling
 @EnableAsync
@@ -34,9 +37,10 @@ public class AsyncTask {
      0/2 * * * * ?     每2秒执行一次
      */
     @Async
-    @Scheduled(cron = "0/10 * * * * ?")
+    @Scheduled(cron = "0/30 * * * * ?")
     //@Scheduled(cron = "0 0 0 * * ?")
     public void message(){
-        System.out.println("-----------定时任务开始执行----------");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("-----------定时任务开始执行, 时间: "+ format.format(new Date()) + "----------");
     }
 }

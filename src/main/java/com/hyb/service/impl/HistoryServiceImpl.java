@@ -14,13 +14,20 @@ public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private HistoryMapper historyMapper;
 
-    @Override
+    @Override//借出
     public List<History> selectMyLendRecord(Integer uid) {
         return historyMapper.selectMyLendRecord(uid);
     }
 
-    @Override
+    @Override//借入
     public List<History> selectMyBorrowRecord(Integer uid) {
         return historyMapper.selectMyBorrowRecord(uid);
     }
+
+    @Override//删除历史记录
+    public void deleteHistoryByBid(Integer bid) {
+        historyMapper.deleteHistoryByBid(bid);
+    }
+
+
 }

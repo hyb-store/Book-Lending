@@ -15,5 +15,14 @@ public interface CommentMapper {
      */
     List<Comment> selectByBid(Integer bid);
 
+    /**
+     * 插入新评论
+     */
+    void insertComment(Comment comment);
 
+    /**
+     * 删除评论
+     * @param cid
+     */
+    void deleteComment(Integer cid);
 }

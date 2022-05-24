@@ -69,6 +69,23 @@
         select * from history h left join `user` u on h.luid = u.uid left join book b on h.bid = b.bid left join `type` t on b.tid = t.tid where h.buid = #{uid}
     </select>
 
+    <select id="selectHistoryByHid" parameterType="Integer" resultMap="historyMap">
+        select * from history where hid = #{hid}
+    </select>
+
+    <insert id="insertNewRecord" parameterType="com.hyb.entity.History">
+        insert into history (lUid, bid, bUid, start_time, end_time, real_time, punctuality)
+        values (#{lUid}, #{bid}, #{bUid}, #{startTime}, #{endTime}, #{realTime}, #{punctuality})
+    </insert>
+
+    <update id="updateRecord" parameterType="com.hyb.entity.History">
+        update history set lUid = #{lUid}, bid = #{bid}, bUid = #{bUid}, start_time = #{startTime}, end_time = #{endTime}, real_time = #{realTime}, punctuality = #{punctuality} where hid = #{hid}
+    </update>
+
+    <delete id="deleteHistoryByBid" parameterType="Integer">
+        DELETE FROM history where bid = #{bid}
+    </delete>
+
 
 
 </mapper>

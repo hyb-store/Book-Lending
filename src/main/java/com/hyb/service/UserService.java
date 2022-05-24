@@ -22,4 +22,8 @@ public interface UserService {
 
     public List<History> getMyBorrowRecord(Integer uid);
 
+    int selectScoresByUid(Integer uid);//根据uid查分数
+
+    void updateScoresByUid(Integer uid, Integer scores);//根据uid改分数
+
 }

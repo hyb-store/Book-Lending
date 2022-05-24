@@ -9,4 +9,6 @@ public interface HistoryService {
     List<History> selectMyLendRecord(Integer uid);
 
     List<History> selectMyBorrowRecord(Integer uid);
+
+    void deleteHistoryByBid(Integer bid);
 }

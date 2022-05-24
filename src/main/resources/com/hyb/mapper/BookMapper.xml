@@ -44,7 +44,9 @@
     </select>
 
     <select id="search" parameterType="String" resultMap="bookMap">
-        select * from book b where b.book_name like concat('%', #{data}, '%') or b.press like concat('%', #{data}, '%') or b.description like concat('%', #{data}, '%')
+        select * from book b where b.book_name like concat('%', #{data}, '%')
+        or b.press like concat('%', #{data}, '%')
+        or b.description like concat('%', #{data}, '%')
     </select>
 
     <select id="selectBookByBid" parameterType="Integer" resultMap="bookMap">
@@ -55,6 +57,30 @@
         select count(bid) from book
     </select>
 
+    <select id="getTop3" resultMap="bookMap">
+        select * from book b where b.status = 0 order by `count` DESC limit 3
+    </select>
 
+    <update id="updateStatusByBid">
+        update book set status = #{status} where bid = #{bid}
+    </update>
+
+    <update id="increaseCount" >
+        update book set `count` = `count` + #{count} where bid = #{bid}
+    </update>
+
+    <select id="selectTidByBid" parameterType="Integer" resultType="Integer">
+        select tid from book where bid = #{bid}
+    </select>
+
+    <update id="updateBook" parameterType="com.hyb.entity.Book">
+        update book set `book_name` = #{bookName}, `author` = #{author}, `press` = #{press},
+        `pub_time` = #{pubTime}, `tid` = #{tid}, `description` = #{description}
+        where bid = #{bid}
+    </update>
+
+    <delete id="deleteBookByBid" parameterType="Integer">
+        DELETE FROM book where bid = #{bid}
+    </delete>
 
 </mapper>

@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/login")
+/*    @GetMapping("/login")
     public ResponseData login (String code) throws IOException {
 //        //code
 //        String code = "041LOv0w3CAdiY2Qdy1w3u1fhQ0LOv0A";
@@ -74,7 +74,9 @@ public class UserController {
         }
         User user = userService.selectUserByOpenId(wxLogin.getOpenId());
         if (user == null) {
-            return new ResponseData(0, "请先完善个人信息", new User());
+            User us = new User();
+            us.setOpenId(wxLogin.getOpenId());
+            return new ResponseData(0, "请先完善个人信息", us);
         }
 
         Map<String, Object> map = new HashMap<>();
@@ -119,6 +121,61 @@ public class UserController {
         }
         userService.updateUser(user);
         responseData = new ResponseData(1, "完善信息成功", userService.selectUserByOpenId(user.getOpenId()));
+        return responseData;
+    }*/
+
+    @GetMapping("/login")//登录获取openid，并插入数据如插入
+    public ResponseData login (String code) throws IOException {
+        ResponseData responseData = null;
+        if (code == null || "".equals(code)) {
+            return new ResponseData(0, "登录失败！", null);
+        }
+
+        String url = wx.getUrl();
+        String forObject = restTemplate.getForObject(url, String.class, code);
+        System.out.println(forObject);
+        WxLogin wxLogin = JSONObject.parseObject(forObject, WxLogin.class);
+
+        if (wxLogin.getErrcode() != null || wxLogin.getErrmsg() != null) {//有错误
+            if ("40163".equals(wxLogin.getErrcode())) {
+                return new ResponseData(0, "code been used", null);
+            } else if ("40029".equals(wxLogin.getErrcode())) {
+                return new ResponseData(0, "invalid code", null);
+            } else {
+                return new ResponseData(0, "登陆失败", null);
+            }
+        }
+        User user = userService.selectUserByOpenId(wxLogin.getOpenId());
+        if (user == null) { //没有该用户，首次登陆插入openId
+            user = new User();
+            user.setOpenId(wxLogin.getOpenId());
+            //新用户插入
+            userService.insertUser(user);
+        }
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("wxLogin", wxLogin);
+        map.put("user", user);
+
+        responseData = new ResponseData(1, "登录成功！", map);
+        return responseData;
+    }
+
+    @PostMapping("/perfect")//完善个人信息
+    public ResponseData perfect(@RequestBody User user) {
+        System.out.println(user);
+        ResponseData responseData = null;
+        if (user.getOpenId() == null || "".equals(user.getOpenId())) {
+            return new ResponseData(0, "openId为空", null);
+        } else if (user.getUsername() == null || "".equals(user.getUsername())) {
+            return new ResponseData(0, "用户名为空", null);
+        } else if (user.getPhoneNum() == null || "".equals(user.getPhoneNum())) {
+            return new ResponseData(0, "电话号码为空", null);
+        } else if ((userService.selectUserByOpenId(user.getOpenId())) == null) {
+            return new ResponseData(1, "该用户不存在", null);
+        }
+        userService.updateUser(user);
+        responseData = new ResponseData(1, "保存成功", userService.selectUserByOpenId(user.getOpenId()));
         return responseData;
     }
 
