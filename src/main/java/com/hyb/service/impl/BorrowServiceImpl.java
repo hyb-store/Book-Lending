@@ -38,29 +38,25 @@ public class BorrowServiceImpl implements BorrowService {
     public void insertNewBook(MultipartFile file, Book book) {
         //获取要上传文件的名称
         String fileName = file.getOriginalFilename();
-
         //获取到后缀名
-        String suffixName = fileName.contains(".") ? fileName.substring(fileName.lastIndexOf(".")) : null;
+        String suffixName = fileName.contains(".") ?
+                fileName.substring(fileName.lastIndexOf(".")) : null;
         //文件的保存重新按照时间戳命名
         String newName = System.currentTimeMillis() + suffixName;
         File newFile = new File(savePath, newName);
-
         if (!newFile.getParentFile().exists()) {
             newFile.getParentFile().mkdirs();
         }
         try {
-            //文件写入
-            file.transferTo(newFile);
+            file.transferTo(newFile);//文件写入
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         book.setStatus(0);
         book.setCount(0);
         //将这些文件的信息写入到数据库中
         System.out.println(book);
         borrowMapper.insertNewBook(book, newName);
-
         userMapper.updateScoresByUid(book.getUid(), 1);//上传图书+1分
     }
 

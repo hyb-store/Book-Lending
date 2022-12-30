@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Book {
 
-    //private final String URL = "http://127.0.0.1:8080/image/";
-    private final String URL = "http://192.168.1.114:8080/image/";
+    private final String URL = "http://127.0.0.1:8080/image/";
+//    private final String URL = "http://192.168.148.129:8080/image/";
 
 
     private Integer bid;

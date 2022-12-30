@@ -18,7 +18,7 @@ spring:
       matching-strategy: ant_path_matcher
   servlet:
     multipart:
-      max-file-size: 5MB
+      max-file-size: 10MB
       max-request-size: 50MB
   jackson:
     time-zone: GMT+8
@@ -44,3 +44,12 @@ logging:
 file:
   save-path: E:/IdeaProjects/book_lending/src/main/resources/static/image/
 
+wx:
+  login:
+    app-id: wx3652d63c5a570b29
+    secret: 011176837f6d23cdb85daf140afc182e
+
+ocr:
+  APP_ID: "25750682"
+  API_KEY: "TPEbBaMi35VAbal27KYHqnGQ"
+  SECRET_KEY: "3CHDc29B9QkMhDMfibwogdaaPfcyvv6f"
